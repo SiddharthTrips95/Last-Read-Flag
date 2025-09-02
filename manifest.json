@@ -1,0 +1,59 @@
+{
+    "manifest_version": 3,
+    "name": "Last‑Read Flag",
+    "version": "0.1.0",
+    "description": "Drop a flag on any page to remember where you left off.",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "contextMenus",
+        "scripting"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_title": "Last‑Read Flag",
+        "default_popup": "popup/popup.html"
+    },
+    "options_page": "options/options.html",
+    "icons": {
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content/content.js"
+            ],
+            "css": [
+                "content/styles.css"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "commands": {
+        "drop_manual_marker": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+M",
+                "mac": "Command+Shift+M"
+            },
+            "description": "Drop a manual reading marker"
+        },
+        "jump_to_last_marker": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+J",
+                "mac": "Command+Shift+J"
+            },
+            "description": "Jump to last reading marker"
+        }
+    }
+}
